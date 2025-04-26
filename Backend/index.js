@@ -3,6 +3,8 @@ const notes = require('./data/notes')
 const dotenv = require('dotenv');
 const connectDB = require('./models/db');
 const cors = require('cors')
+//const User= require('./models/users')
+const userRoute = require('./routes/userRoute')
 
 const app=express();
 app.use(express.json());
@@ -18,7 +20,7 @@ app.get('/',(req,res)=>{
     console.log("Helo bknd");
 })
 
-app.get('/notes',(req,res)=>{
+/*app.get('/notes',(req,res)=>{
     res.send(notes);
     console.log(notes);
 })
@@ -27,7 +29,9 @@ app.get("/notes/:id",(req,res)=>{
     const note=notes.find((n)=>n._id === req.params.id);
     res.send(note);
     console.log(note);
-})
+})*/
+
+app.use('/user',userRoute);
 
 const PORT = process.env.PORT;
 app.listen(PORT,()=>{
